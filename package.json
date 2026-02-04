@@ -3,13 +3,21 @@
   "scripts": {
     "server": "bun run --hot server/index.ts",
     "client": "cd client && bun run dev",
-    "dev": "concurrently \"bun run server\" \"bun run client\""
+    "dev": "concurrently \"bun run server\" \"bun run client\"",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
-    "hono": "^4.11.7"
+    "better-auth": "1.4.17",
+    "drizzle-orm": "^0.45.1",
+    "hono": "^4.11.7",
+    "pg": "^8.18.0"
   },
   "devDependencies": {
     "@types/bun": "latest",
-    "concurrently": "^9.2.1"
+    "@types/pg": "^8.16.0",
+    "concurrently": "^9.2.1",
+    "drizzle-kit": "^0.31.8"
   }
 }
