@@ -24,13 +24,34 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true
+			"nursery": {
+				"useSortedClasses": {
+					"level": "error",
+					"fix": "safe",
+					"options": {
+						"attributes": ["classList", "className"],
+						"functions": ["clsx", "cva", "tw", "tw.*"]
+					}
+				}
+			},
+			"a11y": {
+				"noSvgWithoutTitle": "off",
+				"useSemanticElements": "off"
+			},
+			"complexity": {
+				"useLiteralKeys": "off"
+			},
+			"recommended": true,
+			"suspicious": {
+				"noUnknownAtRules": "off",
+				"noDoubleEquals": "off",
+				"noArrayIndexKey": "off"
+			}
 		}
 	},
 	"javascript": {
 		"formatter": {
-			"quoteStyle": "double"
+			"quoteStyle": "single"
 		}
 	}
 }
-
