@@ -4,6 +4,7 @@
     "server": "bun run --hot server/index.ts",
     "client": "cd client && bun run dev",
     "dev": "concurrently \"bun run server\" \"bun run client\"",
+    "db:push": "drizzle-kit push",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio"
