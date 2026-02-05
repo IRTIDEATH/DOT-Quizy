@@ -8,6 +8,13 @@
       "when": 1770289424934,
       "tag": "0000_uneven_nova",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1770293259344,
+      "tag": "0001_purple_dark_beast",
+      "breakpoints": true
     }
   ]
 }
