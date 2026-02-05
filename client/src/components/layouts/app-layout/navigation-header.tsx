@@ -102,7 +102,7 @@ const NavigationHeader = () => {
 					<div className="flex items-center gap-2">
 						<ModeToggle />
 						<Button asChild className="text-sm" size="sm">
-							<Link to="/">Get Started</Link>
+							<Link to="/auth/login">Get Started</Link>
 						</Button>
 					</div>
 				</div>
