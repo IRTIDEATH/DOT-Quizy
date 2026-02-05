@@ -175,6 +175,20 @@
   --tracking-widest: calc(var(--tracking-normal) + 0.1em);
 }
 
+@utility container {
+  @apply px-8 mx-auto;
+}
+
+@layer components {
+  .inner {
+    @apply mx-auto w-9/10 max-w-285;
+  }
+}
+
+p {
+  @apply leading-relaxed;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
