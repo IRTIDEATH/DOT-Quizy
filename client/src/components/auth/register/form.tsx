@@ -1,6 +1,8 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, useNavigate } from '@tanstack/react-router';
 import type { ErrorContext } from 'better-auth/react';
+import { Eye, EyeOff } from 'lucide-react';
+import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
@@ -12,6 +14,12 @@ import {
 	FieldLabel,
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
+import {
+	InputGroup,
+	InputGroupAddon,
+	InputGroupButton,
+	InputGroupInput,
+} from '@/components/ui/input-group';
 import { authClient } from '@/lib/auth-client';
 import { cn } from '@/lib/utils';
 import {
@@ -24,12 +32,12 @@ export function RegisterForm({
 	...props
 }: React.ComponentProps<'form'>) {
 	const navigate = useNavigate();
+	const [showPassword, setShowPassword] = useState<boolean>(false);
 
 	const initialValues = {
 		name: '',
 		email: '',
 		password: '',
-		confirmPassword: '',
 	};
 
 	const form = useForm<RegisterFormSchema>({
@@ -112,34 +120,30 @@ export function RegisterForm({
 					render={({ field, fieldState }) => (
 						<Field>
 							<FieldLabel htmlFor="password">Password</FieldLabel>
-							<Input
-								{...field}
-								id={field.name}
-								aria-invalid={fieldState.invalid}
-								type="password"
-							/>
+							<InputGroup>
+								<InputGroupInput
+									{...field}
+									id={field.name}
+									aria-invalid={fieldState.invalid}
+									type={showPassword ? 'text' : 'password'}
+								/>
+								<InputGroupAddon align="inline-end">
+									<InputGroupButton
+										type="button"
+										onClick={() => setShowPassword(!showPassword)}
+										aria-label={
+											showPassword ? 'Hide password' : 'Show password'
+										}
+									>
+										{showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+									</InputGroupButton>
+								</InputGroupAddon>
+							</InputGroup>
 							{fieldState.invalid && <FieldError errors={[fieldState.error]} />}
 						</Field>
 					)}
 				/>
-				<Controller
-					control={form.control}
-					name="confirmPassword"
-					render={({ field, fieldState }) => (
-						<Field>
-							<FieldLabel htmlFor="confirmPassword">
-								Confirm Password
-							</FieldLabel>
-							<Input
-								{...field}
-								id={field.name}
-								aria-invalid={fieldState.invalid}
-								type="password"
-							/>
-							{fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-						</Field>
-					)}
-				/>
+
 				<Field>
 					<Button type="submit">
 						{form.formState.isSubmitting
@@ -150,7 +154,7 @@ export function RegisterForm({
 				<Field>
 					<FieldDescription className="text-center">
 						Already have an account?{' '}
-						<Link to="/auth/login" className="underline underline-offset-4">
+						<Link to="/login" className="underline underline-offset-4">
 							Sign in
 						</Link>
 					</FieldDescription>

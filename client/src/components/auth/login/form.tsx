@@ -1,6 +1,8 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, useNavigate } from '@tanstack/react-router';
 import type { ErrorContext } from 'better-auth/react';
+import { Eye, EyeOff } from 'lucide-react';
+import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
@@ -12,6 +14,12 @@ import {
 	FieldLabel,
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
+import {
+	InputGroup,
+	InputGroupAddon,
+	InputGroupButton,
+	InputGroupInput,
+} from '@/components/ui/input-group';
 import { authClient } from '@/lib/auth-client';
 import { cn } from '@/lib/utils';
 import {
@@ -24,6 +32,7 @@ export function LoginForm({
 	...props
 }: React.ComponentProps<'form'>) {
 	const navigate = useNavigate();
+	const [showPassword, setShowPassword] = useState<boolean>(false);
 
 	const initialValues = {
 		email: '',
@@ -93,12 +102,25 @@ export function LoginForm({
 					render={({ field, fieldState }) => (
 						<Field>
 							<FieldLabel htmlFor="password">Password</FieldLabel>
-							<Input
-								{...field}
-								id={field.name}
-								aria-invalid={fieldState.invalid}
-								type="password"
-							/>
+							<InputGroup>
+								<InputGroupInput
+									{...field}
+									id={field.name}
+									aria-invalid={fieldState.invalid}
+									type={showPassword ? 'text' : 'password'}
+								/>
+								<InputGroupAddon align="inline-end">
+									<InputGroupButton
+										type="button"
+										onClick={() => setShowPassword(!showPassword)}
+										aria-label={
+											showPassword ? 'Hide password' : 'Show password'
+										}
+									>
+										{showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+									</InputGroupButton>
+								</InputGroupAddon>
+							</InputGroup>
 							{fieldState.invalid && <FieldError errors={[fieldState.error]} />}
 						</Field>
 					)}
