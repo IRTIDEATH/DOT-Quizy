@@ -1,5 +1,6 @@
 import { Link } from '@tanstack/react-router';
 import { CircleStar } from 'lucide-react';
+import ProfileMenu from '@/components/profile-menu';
 import ModeToggle from '@/components/theme-toggle';
 import { Button } from '@/components/ui/button';
 import {
@@ -13,6 +14,8 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 } from '@/components/ui/popover';
+import { Separator } from '@/components/ui/separator';
+import { authClient } from '@/lib/auth-client';
 
 const navigationLinks = [
 	{ active: true, href: '#', label: 'Home' },
@@ -21,6 +24,8 @@ const navigationLinks = [
 ];
 
 const NavigationHeader = () => {
+	const { data, isPending } = authClient.useSession();
+
 	return (
 		<header className="absolute inset-x-0 z-10 border-b">
 			<div className="container px-4 py-4 md:px-8 md:py-6">
@@ -99,11 +104,16 @@ const NavigationHeader = () => {
 							</NavigationMenu>
 						</div>
 					</div>
-					<div className="flex items-center gap-2">
+					<div className="flex h-8 items-center gap-2">
 						<ModeToggle />
-						<Button asChild className="text-sm" size="sm">
-							<Link to="/auth/login">Get Started</Link>
-						</Button>
+						<Separator orientation="vertical" />
+						{data?.user ? (
+							<ProfileMenu user={data.user} />
+						) : (
+							<Button asChild className="text-sm" size="sm">
+								<Link to="/login">Get Started</Link>
+							</Button>
+						)}
 					</div>
 				</div>
 			</div>

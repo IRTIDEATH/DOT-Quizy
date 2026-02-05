@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { LoginForm } from '@/components/auth/login/form';
+import { RegisterForm } from '@/components/auth/register/form';
 
-export const Route = createFileRoute('/auth/login')({
+export const Route = createFileRoute('/(auth)/register')({
 	component: App,
 });
 
@@ -11,14 +11,14 @@ function App() {
 			<div className="flex flex-col gap-4 p-6 md:p-10">
 				<div className="flex flex-1 items-center justify-center">
 					<div className="w-full max-w-xs">
-						<LoginForm />
+						<RegisterForm />
 					</div>
 				</div>
 			</div>
 			<div className="relative hidden bg-muted lg:block">
 				<img
 					src="/placeholder.svg"
-					alt="login"
+					alt="register"
 					className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
 				/>
 			</div>
