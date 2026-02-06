@@ -1,5 +1,6 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { config } from "../config";
 import { db } from "../database/db";
 import * as schema from "../database/schema";
 import { admin, openAPI } from "better-auth/plugins";
@@ -28,7 +29,7 @@ export const auth = betterAuth({
       },
     },
   },
-  trustedOrigins: [process.env.CLIENT_URL!],
+  trustedOrigins: [config.clientUrl],
   plugins: [openAPI(), admin()],
   advanced: {
     database: {
